@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Menu {
 	private int x;
-	private int check=1;
+	private static int check=1;
 	private ArrayList<ContaCorrente> listcorrente = new ArrayList<>();
 	private ArrayList<ContaPoupanca> listpoupanca = new ArrayList<>();
 	Scanner in = new Scanner(System.in);
@@ -31,6 +31,9 @@ public class Menu {
 			}
 		}
 	}
+	
+	
+	
 public void menuSecundario() {
 	System.out.println("1-ContaCorrente, 2-ContaPoupança");
 	int filtro;
@@ -42,14 +45,22 @@ public void menuSecundario() {
 			menuContaPoupanca();
 		}else
 			System.out.println("EntradaInvalida!");
-}	
+}
+
+
+
+
+
 public void menuContaCorrente() {
 	System.out.println("Digite O Numero Da Sua Conta:");
 	check = in.nextInt();
 	int s =0;
-	for(ContaCorrente contacorrente : listcorrente){
-	    if(contacorrente.getNumero()!=0 && contacorrente.getNumero()==check)
+	for(ContaCorrente contacorrente : listcorrente)
+	    if(contacorrente.getNumero()==check) {
 	    	System.out.println("ContaNumero: "+contacorrente.getNumero());
+	    	
+	    	if(contacorrente.verificaSenha(in)) {
+	    		
 	    System.out.println("1-Saca, 2-Deposita");
 	    System.out.println("3-Extrato, 4-Num de Transaçoes");
 	    System.out.println("5-AlterarSenha, Outros-Sair");
@@ -65,21 +76,32 @@ public void menuContaCorrente() {
 	    	contacorrente.tiraExtrato();
 	    	break;	    	
 	    case 4:
-	    	contacorrente.getQtdtr();
+	    	contacorrente.getNum();
 	    	break;
 	    case 5:
 	    	contacorrente.alteraSenha(in);
 	    default:
 	    	break;
-	    }		    	
+	    }
+	 }	
+   }	    	
 }
-}
+
+
+
 public void menuContaPoupanca() {
 	System.out.println("Digite O Numero Da Sua Conta:");
 	check = in.nextInt();
 	int s =0;
-	for(ContaPoupanca contapoupanca : listpoupanca){
-	    if(contapoupanca.getNumero()!=0 && contapoupanca.getNumero()==check)
+	for(ContaPoupanca contapoupanca : listpoupanca)
+	    if(contapoupanca.getNumero()==check) {
+	    	System.out.println("ContaNumero: "+contapoupanca.getNumero());
+	    	
+	    if(contapoupanca.verificaSenha(in)) {	
+	    	System.out.println("1-Saca, 2-Deposita");
+	 	    System.out.println("3-Extrato, 4-Num de Transaçoes");
+	 	    System.out.println("5-AlterarSenha, Outros-Sair");
+	 	    s = in.nextInt();
 	    switch(s) {
 	    case 1:
 	    	contapoupanca.saca(in);
@@ -99,8 +121,11 @@ public void menuContaPoupanca() {
 	    	break;
 	    }
 	}
+  }
 }
-/////////////cria instacia de conta e adiciona a suas respectivas listas;
+	
+	
+	
 public void menuNovaConta() {
 	x=0;
 	
@@ -130,19 +155,20 @@ public void menuNovaConta() {
 	}
 }
 
-//////////verifica exixtencia de conta se sim adiciona 1 ao seu numero e retorna este valor;
+
+
 public int verifica() {
 	if(x==1) {
-	for(ContaBancaria contacorrente : listcorrente){
-	    if(contacorrente.getNumero()!=0 && contacorrente.getNumero()==check)
+	for(ContaBancaria contacorrente : listcorrente)
+	    if(contacorrente.getNumero()==check) {
 	    	check = contacorrente.getNumero()+1;
+
 }
 	}else
 		if(x==2) {
-			for(ContaBancaria contapoupanca : listpoupanca){
-			    if(contapoupanca.getNumero()!=0 && contapoupanca.getNumero()==check)
+			for(ContaBancaria contapoupanca : listpoupanca)
+			    if(contapoupanca.getNumero()==check) {
 			    	check = contapoupanca.getNumero()+1;
-			
 		}
 	}
 	return check;
