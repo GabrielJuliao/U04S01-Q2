@@ -61,20 +61,17 @@ protected  double tiraExtrato() {
 
 
 protected String alteraSenha(Scanner in) {
-	String novaSenha;
 	String verificaSenha;
 	if(senha==null) {
 		System.out.println("Digite Sua Nova Senha: ");
-		novaSenha= in.next();
-		senha = encrypt(novaSenha);
+		senha = encrypt(in.next());
 	}else
 		if(senha!=null) {
 		System.out.println("Digite Sua Senha Anterior: ");
 		verificaSenha=in.next();
 		if(verificaSenha==senha) {
 			System.out.println("Digite Sua Nova Senha: ");
-			novaSenha= in.next();
-			senha = encrypt(novaSenha);
+			senha = encrypt(in.next());
 		}else
 			System.out.println("SenhaInvalida!");
 		}
