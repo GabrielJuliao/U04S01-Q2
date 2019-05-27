@@ -51,8 +51,8 @@ protected  double deposita(Scanner in) {
 
 
 
-protected  double tiraExtrato() {
-	return saldo;	
+protected  void tiraExtrato() {
+	System.out.println("Saldo Atual: "+saldo);	
 }
 
 
@@ -68,8 +68,8 @@ protected String alteraSenha(Scanner in) {
 	}else
 		if(senha!=null) {
 		System.out.println("Digite Sua Senha Anterior: ");
-		verificaSenha=in.next();
-		if(verificaSenha==senha) {
+		verificaSenha = encrypt(in.next());
+		if(verificaSenha.equals(senha)) {
 			System.out.println("Digite Sua Nova Senha: ");
 			senha = encrypt(in.next());
 		}else
